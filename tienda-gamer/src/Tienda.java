@@ -154,7 +154,8 @@ public class Tienda {
                 + "4. Memorias RAM\n"
                 + "5. Fuentes de poder\n"
                 + "6. Almacenamiento\n"
-                + "7. Salir\n");
+                + "7. Salir\n"
+                + "8. Proceder al pago\n");
 
         /* Programando la interfaz */
         System.out.println();
@@ -163,7 +164,7 @@ public class Tienda {
 
         int opcion = validarOpcion(dato);
 
-        while (opcion < 1 || opcion > 7) {
+        while (opcion < 1 || opcion > 8) {
             System.out.println();
             System.out.println("██╗\n"
                     + "██║\n"
@@ -351,7 +352,7 @@ public class Tienda {
                         + "╚═╝\n");
                 System.out.print(" ¡ERROR :c! Escoja un numero correcto del listado: ");
                 dato = entrada.nextLine().trim();
-                seleccion = validarOpcion(dato);
+                gpuMarca = validarOpcion(dato);
             }
             gpuMarca = validarOpcion(dato);
 
@@ -730,6 +731,67 @@ public class Tienda {
             }
         } else if (opcion == 7) {
             System.out.println("Gracias por usar nuestros servicios"); // Sysout
+        } else if (opcion == 8) {
+            procederPago();
+        }
+    }
+
+    /* Obteniendo valor total a pagar */
+    public void procederPago() {
+        pagoTotal = precioBaseGPU + precioBasePlacaMadre + precioBaseMemoriaRam + precioBaseFuentePoder
+                + precioBaseAlmacenamiento;
+
+        System.out.println("Total a pagar: " + pagoTotal);
+
+        /* Validacion del pago */
+        if (pagoTotal > monto) {
+            System.out.println("El pago total es superior al monto inicial");
+            System.out.println("No se puede proceder con el pago");
+
+            mostrarMenu();
+        } else if (pagoTotal == 0) {
+            System.out.println("No ha seleccionado ningún producto");
+            mostrarMenu();
+        } else {
+            System.out.println("Realizando pago...");
+            System.out.println("El pago ha sido cancelado exitosamente");
+            System.out.println("Su monto inicial quedo con: " + (monto - pagoTotal));
+
+            if (pagoTotal >= 1_000_000) {
+                System.out.println(
+                        "Como tu compra ha superado el 1.000.000 de pesos decidimos darte un descuento que varia del 2% y 20%");
+                descuentoAleatorio();
+            }
+        }
+    }
+
+    /* Creando el descuento */
+    public void descuentoAleatorio() {
+        // Decuento aleatorio entre el 2% y 20%
+        float descuentoAleatorio = (float) ((Math.random() * 20) + 2) / 100;
+        int numAleatorio = (int) (Math.random() * 10) + 1;
+
+        System.out.println(
+                "Consta de una ruleta en la que puedes obtener un descuento si acertas el numero aleatorio generado entre 1 y 10");
+        System.out.println();
+        System.out.print("Digita el numero que creas que puede ser el correcto generado: ");
+
+        int numeroUsuario = Integer.parseInt(entrada.nextLine());
+
+        if (numeroUsuario == numAleatorio) {
+            System.out.println("¡Felicidades! aplicando descuento de: " + descuentoAleatorio * 100 + "%");
+            pagoTotal = pagoTotal - (pagoTotal * descuentoAleatorio);
+
+            System.out.println("Su valor total a pagar es de: " + pagoTotal);
+            System.out.println("Su monto inicial quedo con: " + (monto - pagoTotal));
+            mostrarMenu();
+        } else {
+            System.out.println("El numero que elegiste no es el acertado :C \n");
+            System.out.println("El numero correcto era: " + numAleatorio);
+            System.out.println("Procesando transaccion..." 
+            + "Pago realizado correctamente :) \n");
+
+            System.out.println("Su monto inicial quedo con: " + (monto - pagoTotal));
         }
     }
 }
