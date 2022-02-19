@@ -46,7 +46,7 @@ public class App {
 
                 obj.setNombreUsuario(nombreUsuario);
 
-                obj.setMonto(Float.parseFloat(monto));
+                obj.setMonto(Long.parseLong(monto));
                 obj.mostrarMenu();
         }
 }
