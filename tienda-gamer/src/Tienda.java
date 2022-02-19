@@ -4,20 +4,20 @@ import java.util.regex.Pattern;
 
 public class Tienda {
     private String nombreUsuario;
-    private float monto;
-    private float precioBaseCPU;
-    private float precioBaseGPU;
-    private float precioBasePlacaMadre;
-    private float precioBaseMemoriaRam;
-    private float precioBaseFuentePoder;
-    private float precioBaseAlmacenamiento;
-    private float pagoTotal;
+    private long monto;
+    private long precioBaseCPU;
+    private long precioBaseGPU;
+    private long precioBasePlacaMadre;
+    private long precioBaseMemoriaRam;
+    private long precioBaseFuentePoder;
+    private long precioBaseAlmacenamiento;
+    private long pagoTotal;
     private int seleccion = -1;
 
     Scanner entrada = new Scanner(System.in);
     Catalogos obj = new Catalogos();
 
-    public Tienda(String nombreUsuario, float monto) {
+    public Tienda(String nombreUsuario, long monto) {
         this.setNombreUsuario(nombreUsuario);
         this.setMonto(monto);
         setPagoTotal(0);
@@ -32,7 +32,7 @@ public class Tienda {
         return pagoTotal;
     }
 
-    public void setPagoTotal(float pagoTotal) {
+    public void setPagoTotal(long pagoTotal) {
         this.pagoTotal = pagoTotal;
     }
 
@@ -40,7 +40,7 @@ public class Tienda {
         return precioBaseAlmacenamiento;
     }
 
-    public void setPrecioBaseAlmacenamiento(float precioBaseAlmacenamiento) {
+    public void setPrecioBaseAlmacenamiento(long precioBaseAlmacenamiento) {
         this.precioBaseAlmacenamiento = precioBaseAlmacenamiento;
     }
 
@@ -48,7 +48,7 @@ public class Tienda {
         return precioBaseMemoriaRam;
     }
 
-    public void setPrecioBaseMemoriaRam(float precioBaseMemoriaRam) {
+    public void setPrecioBaseMemoriaRam(long precioBaseMemoriaRam) {
         this.precioBaseMemoriaRam = precioBaseMemoriaRam;
     }
 
@@ -56,7 +56,7 @@ public class Tienda {
         return precioBasePlacaMadre;
     }
 
-    public void setPrecioBasePlacaMadre(float precioBasePlacaMadre) {
+    public void setPrecioBasePlacaMadre(long precioBasePlacaMadre) {
         this.precioBasePlacaMadre = precioBasePlacaMadre;
     }
 
@@ -64,7 +64,7 @@ public class Tienda {
         return precioBaseFuentePoder;
     }
 
-    public void setPrecioBaseFuentePoder(float precioBaseFuentePoder) {
+    public void setPrecioBaseFuentePoder(long precioBaseFuentePoder) {
         this.precioBaseFuentePoder = precioBaseFuentePoder;
     }
 
@@ -72,7 +72,7 @@ public class Tienda {
         return precioBaseGPU;
     }
 
-    public void setPrecioBaseGPU(float precioBaseGPU) {
+    public void setPrecioBaseGPU(long precioBaseGPU) {
         this.precioBaseGPU = precioBaseGPU;
     }
 
@@ -88,7 +88,7 @@ public class Tienda {
         return precioBaseCPU;
     }
 
-    public void setPrecioBaseCPU(float precioBaseCPU) {
+    public void setPrecioBaseCPU(long precioBaseCPU) {
         this.precioBaseCPU = precioBaseCPU;
     }
 
@@ -96,7 +96,7 @@ public class Tienda {
         return monto;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(long monto) {
         this.monto = monto;
     }
 
@@ -133,7 +133,7 @@ public class Tienda {
                     + "╚═╝\n"
                     + "██╗\n"
                     + "╚═╝\n");
-            System.out.print("¡ERROR :c! Escoja un numero correcto del listado!: ");
+            System.out.print("¡ERROR :c! ¡Escoja un numero correcto!: ");
             opcion = entrada.nextLine().trim();
             ok = validarMonto(opcion);
         }
@@ -739,7 +739,7 @@ public class Tienda {
     /* Obteniendo valor total a pagar */
     public void procederPago() {
         pagoTotal = precioBaseGPU + precioBasePlacaMadre + precioBaseMemoriaRam + precioBaseFuentePoder
-                + precioBaseAlmacenamiento;
+                + precioBaseAlmacenamiento + precioBaseCPU;
 
         System.out.println("Total a pagar: " + pagoTotal);
 
@@ -754,7 +754,6 @@ public class Tienda {
             mostrarMenu();
         } else {
             System.out.println("Realizando pago...");
-            System.out.println("El pago ha sido cancelado exitosamente");
             System.out.println("Su monto inicial quedo con: " + (monto - pagoTotal));
 
             if (pagoTotal >= 1_000_000) {
@@ -768,7 +767,7 @@ public class Tienda {
     /* Creando el descuento */
     public void descuentoAleatorio() {
         // Decuento aleatorio entre el 2% y 20%
-        float descuentoAleatorio = (float) ((Math.random() * 20) + 2) / 100;
+        int descuentoAleatorio = (int) ((Math.random() * 20) + 2) / 100;
         int numAleatorio = (int) (Math.random() * 10) + 1;
 
         System.out.println(
@@ -776,9 +775,24 @@ public class Tienda {
         System.out.println();
         System.out.print("Digita el numero que creas que puede ser el correcto generado: ");
 
-        int numeroUsuario = Integer.parseInt(entrada.nextLine());
+        String numeroUsuario = entrada.nextLine();
 
-        if (numeroUsuario == numAleatorio) {
+        int numeroUsuarioValidado = validarOpcion(numeroUsuario);
+
+        while (numeroUsuarioValidado < 1 || numeroUsuarioValidado > 10) {
+            System.out.println("██╗\n"
+                    + "██║\n"
+                    + "██║\n"
+                    + "╚═╝\n"
+                    + "██╗\n"
+                    + "╚═╝\n");
+            System.out.print(" ¡ERROR :c! Escoja un numero correcto! (entre 1 y 10): ");
+
+            numeroUsuario = entrada.nextLine();
+            numeroUsuarioValidado = validarOpcion(numeroUsuario);
+        }
+
+        if (numeroUsuarioValidado == numAleatorio) {
             System.out.println("¡Felicidades! aplicando descuento de: " + descuentoAleatorio * 100 + "%");
             pagoTotal = pagoTotal - (pagoTotal * descuentoAleatorio);
 
@@ -788,8 +802,8 @@ public class Tienda {
         } else {
             System.out.println("El numero que elegiste no es el acertado :C \n");
             System.out.println("El numero correcto era: " + numAleatorio);
-            System.out.println("Procesando transaccion..." 
-            + "Pago realizado correctamente :) \n");
+            System.out.println("Procesando transaccion..."
+                    + "Pago realizado correctamente :) \n");
 
             System.out.println("Su monto inicial quedo con: " + (monto - pagoTotal));
         }
