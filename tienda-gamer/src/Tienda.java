@@ -768,8 +768,8 @@ public class Tienda {
     public void descuentoAleatorio() {
         // Decuento aleatorio entre el 2% y 20%
         float descuentoAleatorio = (float) ((Math.random() * 20) + 2) / 100;
-        // int numAleatorio = (int) (Math.random() * 10) + 1;
-        int numAleatorio = 3;
+        int numAleatorio = (int) (Math.random() * 10) + 1;
+     
 
         System.out.println(
                 "Consta de una ruleta en la que puedes obtener un descuento si acertas el numero aleatorio generado entre 1 y 10");
