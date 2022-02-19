@@ -767,8 +767,9 @@ public class Tienda {
     /* Creando el descuento */
     public void descuentoAleatorio() {
         // Decuento aleatorio entre el 2% y 20%
-        int descuentoAleatorio = (int) ((Math.random() * 20) + 2) / 100;
-        int numAleatorio = (int) (Math.random() * 10) + 1;
+        float descuentoAleatorio = (float) ((Math.random() * 20) + 2) / 100;
+        // int numAleatorio = (int) (Math.random() * 10) + 1;
+        int numAleatorio = 3;
 
         System.out.println(
                 "Consta de una ruleta en la que puedes obtener un descuento si acertas el numero aleatorio generado entre 1 y 10");
@@ -794,9 +795,9 @@ public class Tienda {
 
         if (numeroUsuarioValidado == numAleatorio) {
             System.out.println("¡Felicidades! aplicando descuento de: " + descuentoAleatorio * 100 + "%");
-            pagoTotal = pagoTotal - (pagoTotal * descuentoAleatorio);
+            pagoTotal = (long) (pagoTotal - (pagoTotal * (descuentoAleatorio)));
 
-            System.out.println("Su valor total a pagar es de: " + pagoTotal);
+            System.out.println("Su valor total a pagar ahora es de: " + pagoTotal);
             System.out.println("Su monto inicial quedo con: " + (monto - pagoTotal));
             mostrarMenu();
         } else {
