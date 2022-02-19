@@ -807,6 +807,7 @@ public class Tienda {
                     + "Pago realizado correctamente :) \n");
 
             System.out.println("Su monto inicial quedo con: " + (monto - pagoTotal));
+            mostrarMenu();
         }
     }
 }
