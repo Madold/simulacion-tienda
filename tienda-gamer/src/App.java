@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class App {
-                public static void main(String[] args) {
+        public static void main(String[] args) {
                 Scanner entrada = new Scanner(System.in);
                 Tienda obj = new Tienda("", 0);
                 System.out.print(" __^__                                      __^__ \n"
