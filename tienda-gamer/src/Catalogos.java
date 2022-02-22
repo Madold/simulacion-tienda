@@ -86,9 +86,9 @@ public class Catalogos {
         System.out.println("=> Catalogo de Fuentes de Poder\n" +
                 "1. COUGAR VTC 400w Certificación 80 plus gold      --> $312.000\n"
                 + "2. Corsair SF 600w Gold Modular                    --> $400.000\n"
-                + "3.  Cougar AURIC 750w Certificacion 80 Plus Gold   --> $450.000\n"
-                + "4. EVGA Supernona 1000w certificacion 80 plus gold --> $600.000\n"
-                + "5. EVGA Supernona 1300w certificacion 80 plus gold --> $830.000\n");
+                + "3. Cougar AURIC 750w Certificacion 80 Plus Gold   --> $450.000\n"
+                + "4. EVGA Supernova 1000w certificacion 80 plus gold --> $600.000\n"
+                + "5. EVGA Supernova 1300w certificacion 80 plus gold --> $830.000\n");
     }
     /************************* ALMACENAMIENTOS *****************************/
     public void mostrarCatalogoHDD() {
