@@ -2,6 +2,39 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/* 
+
+CREADO POR: Marco Portacio & Andres Suarez, Estudiantes. Programa de Ingenieria de Sistemas, Universidad de Cordoba Sem 1
+
+----------- --- ------
+DESCRIPCION DEL MODELO
+----------- --- ------
+Se desea simular el proceso de compra en una tienda de hardware, para computadoras de alto rendimiento, especificamente para uso 
+gaming. La tienda esta constituida por un menu de navegación por el cual dependiendo el numero del listado el usuario puede navegar
+entre los diferenfes catalogos que ofrece la tienda, así mismo puede volver al menu anterior si desea seguir viendo otros productos.
+
+Inicialmente el programa le pide al usuario el nombre y su presupuesto inicial, este será clave para realizar el pago final 
+de las compras que haya seleccionado el usuario.
+
+A) El usuario puede seleccionar los productos que quiera y serán almacenados en un carrito de pago
+B) Al momento de calcular el pago total se verificará si supera el 1.000.000, si lo anterior es verdadero se iniciará
+una dinamica la cual consta de que el cliente adivine un numero entre el 1 y el 10 (generado internamente por el programa)
+C) Si el usuario acierta con el numero aleatorio generado, el pago final se le hará un descuento que varía entre el 2% y el 20%
+D) Si el total a pagar exede el monto inicial proporcionado por el usuario, se deniega la compra y el carrito de compras se reinicia
+(el pago total se vuelve 0)
+E) Debe haber una opción para ver información sobre la compra, es decir: que muestre cuanto es el presupuesto incial, valor total
+ 
+--------- --- ------
+VARIABLES DEL MODELO
+--------- --- ------
+* Nombre del usuario: String
+* Monto: String (Despues se convierte a entero)
+* precio de base CPU, GPU, Placa madre, Memoria Ram, Fuente de poder, Almacenamiento: Long
+* pago total: Long
+* Selección del usuario: int
+
+*/
+
 public class Tienda {
     private String nombreUsuario;
     private long monto;
@@ -114,6 +147,30 @@ public class Tienda {
         return ok;
     }
 
+    public void mostrarTextoAgradecimiento() {
+        System.out.println(
+                "░██████╗░██████╗░░█████╗░░█████╗░██╗░█████╗░░██████╗  ██████╗░░█████╗░██████╗░  ░██████╗██╗░░░██╗ \n"
+                        + "██╔════╝░██╔══██╗██╔══██╗██╔══██╗██║██╔══██╗██╔════╝ ██╔══██╗██╔══██╗██╔══██╗  ██╔════╝██║░░░██║\n"
+                        + "██║░░██╗░██████╔╝███████║██║░░╚═╝██║███████║╚█████╗░  ██████╔╝██║░░██║██████╔╝  ╚█████╗░██║░░░██║\n"
+                        + "██║░░╚██╗██╔══██╗██╔══██║██║░░██╗██║██╔══██║░╚═══██╗  ██╔═══╝░██║░░██║██╔══██╗  ░╚═══██╗██║░░░██║\n"
+                        + "╚██████╔╝██║░░██║██║░░██║╚█████╔╝██║██║░░██║██████╔╝  ██║░░░░░╚█████╔╝██║░░██║  ██████╔╝╚██████╔╝\n"
+                        + "░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░╚═╝╚═╝░░╚═╝╚═════╝░  ╚═╝░░░░░░╚════╝░╚═╝░░╚═╝  ╚═════╝░░╚═════╝░\n"
+                        + "                                                                                                    \n"
+                        + "░█████╗░░█████╗░███╗░░░███╗██████╗░██████╗░░█████╗░██╗░░░  ██╗░░░██╗██╗░░░██╗███████╗██╗░░░░░██╗░░░██╗░█████╗░\n"
+                        + "██╔══██╗██╔══██╗████╗░████║██╔══██╗██╔══██╗██╔══██╗██║░░░  ██║░░░██║██║░░░██║██╔════╝██║░░░░░██║░░░██║██╔══██╗\n"
+                        + "██║░░╚═╝██║░░██║██╔████╔██║██████╔╝██████╔╝███████║██║░░░  ╚██╗░██╔╝██║░░░██║█████╗░░██║░░░░░╚██╗░██╔╝███████║\n"
+                        + "██║░░██╗██║░░██║██║╚██╔╝██║██╔═══╝░██╔══██╗██╔══██║╚═╝██╗  ░╚████╔╝░██║░░░██║██╔══╝░░██║░░░░░░╚████╔╝░██╔══██║\n"
+                        + "╚█████╔╝╚█████╔╝██║░╚═╝░██║██║░░░░░██║░░██║██║░░██║██╗╚█║  ░░╚██╔╝░░╚██████╔╝███████╗███████╗░░╚██╔╝░░██║░░██║\n"
+                        + "░╚════╝░░╚════╝░╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░╚╝  ░░░╚═╝░░░░╚═════╝░╚══════╝╚══════╝░░░╚═╝░░░╚═╝░░╚═╝\n"
+                        + "                                                                                                                \n"
+                        + "██████╗░██████╗░░█████╗░███╗░░██╗████████╗░█████╗░██╗  ██╗██╗░░\n"
+                        + "██╔══██╗██╔══██╗██╔══██╗████╗░██║╚══██╔══╝██╔══██╗██║  ╚═╝╚██╗░\n"
+                        + "██████╔╝██████╔╝██║░░██║██╔██╗██║░░░██║░░░██║░░██║██║  ░░░░╚██╗\n"
+                        + "██╔═══╝░██╔══██╗██║░░██║██║╚████║░░░██║░░░██║░░██║╚═╝  ██╗░██╔╝\n"
+                        + "██║░░░░░██║░░██║╚█████╔╝██║░╚███║░░░██║░░░╚█████╔╝██╗  ╚█║██╔╝░\n"
+                        + "╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═╝░░╚══╝░░░╚═╝░░░░╚════╝░╚═╝  ░╚╝╚═╝░░");
+    }
+
     public int validarOpcion(String opcion) {
         boolean ok = false;
 
@@ -155,7 +212,8 @@ public class Tienda {
                 + "5. Fuentes de poder\n"
                 + "6. Almacenamiento\n"
                 + "7. Salir\n"
-                + "8. Proceder al pago\n");
+                + "8. Proceder al pago\n"
+                + "9. Ver información de la compra\n");
 
         /* Programando la interfaz */
         System.out.println();
@@ -164,7 +222,7 @@ public class Tienda {
 
         int opcion = validarOpcion(dato);
 
-        while (opcion < 1 || opcion > 8) {
+        while (opcion < 1 || opcion > 9) {
             System.out.println();
             System.out.println("██╗\n"
                     + "██║\n"
@@ -181,13 +239,19 @@ public class Tienda {
     public void mostrarProcesamientoAccion() {
         System.out.println();
         System.out.println("Procesando Accion...");
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
         System.out.print("El producto se añadió correctamente al carrito :)");
         System.out.println();
         mostrarMenu();
     }
 
     public void evaluarOpcion(int opcion) {
-
         if (/* CPUS */opcion == 1) {
             System.out.println("Seleccione una marca por su numero: 1. AMD    2. Intel ");
             System.out.print("Si quiere regresar, escriba 0 -->: ");
@@ -274,7 +338,6 @@ public class Tienda {
                         // AMD Ryzen 9 3950XT
                         precioBaseCPU += 2_715_000;
                     }
-
                     mostrarProcesamientoAccion();
                 }
 
@@ -730,10 +793,42 @@ public class Tienda {
                 mostrarMenu();
             }
         } else if (opcion == 7) {
-            System.out.println("Gracias por usar nuestros servicios"); // Sysout
+            mostrarTextoAgradecimiento();
         } else if (opcion == 8) {
             procederPago();
+        } else if (opcion == 9) {
+            mostrarInfoCompra();
         }
+    }
+
+    public void mostrarInfoCompra() {
+        pagoTotal = precioBaseGPU + precioBasePlacaMadre + precioBaseMemoriaRam + precioBaseFuentePoder
+                + precioBaseAlmacenamiento + precioBaseCPU;
+
+        System.out.println();
+
+        System.out.println("Su presupuesto es: " + monto + "\n"
+                + "Valor a pagar por todas sus compras: " + pagoTotal + "\n"
+                + "Su presupuesto quedaría con: " + (monto - pagoTotal));
+
+        System.out.println();
+
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Volviendo al menú...");
+
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        mostrarMenu();
+
     }
 
     /* Obteniendo valor total a pagar */
@@ -745,8 +840,41 @@ public class Tienda {
 
         /* Validacion del pago */
         if (pagoTotal > monto) {
+            System.out.println();
+            System.out.println("██╗\n"
+                    + "██║\n"
+                    + "██║\n"
+                    + "╚═╝\n"
+                    + "██╗\n"
+                    + "╚═╝\n");
             System.out.println("El pago total es superior al monto inicial");
-            System.out.println("No se puede proceder con el pago");
+            try {
+                Thread.sleep(2300);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            System.out.println("No se puede proceder con el pago, reiniciando su carrito de compras...");
+
+            setPagoTotal(0);
+            setPrecioBaseCPU(0);
+            setPrecioBaseGPU(0);
+            setPrecioBasePlacaMadre(0);
+            setPrecioBaseMemoriaRam(0);
+            setPrecioBaseAlmacenamiento(0);
+
+            try {
+                Thread.sleep(2300);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+
+            System.out.println("Regresando al menu de interacción...");
+
+            try {
+                Thread.sleep(2300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             mostrarMenu();
         } else if (pagoTotal == 0) {
@@ -769,7 +897,6 @@ public class Tienda {
         // Decuento aleatorio entre el 2% y 20%
         float descuentoAleatorio = (float) ((Math.random() * 20) + 2) / 100;
         int numAleatorio = (int) (Math.random() * 10) + 1;
-     
 
         System.out.println(
                 "Consta de una ruleta en la que puedes obtener un descuento si acertas el numero aleatorio generado entre 1 y 10");
