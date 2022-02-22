@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class App {
-        public static void main(String[] args) {
+                public static void main(String[] args) {
                 Scanner entrada = new Scanner(System.in);
                 Tienda obj = new Tienda("", 0);
                 System.out.print(" __^__                                      __^__ \n"
@@ -21,8 +21,27 @@ public class App {
                 System.out.print("==> Bienvenido a la tienda gamer M&S Gaming Products! <==\n" +
                                 "Introduzca su nombre porfavor: ");
                 String nombreUsuario = entrada.nextLine().trim();
+                System.out.println();
                 System.out.println("Bienvenido " + nombreUsuario);
+                System.out.println();
+                System.out.println("░░░▓▓▓▓▓░░░░ \n"
+                                + "░░▓▓▓▓▓▓▓▓▓░ \n"
+                                + "░░███▒▒█▒░░░\n"
+                                + "░█▒█▒▒▒█▒▒▒░\n"
+                                + "░█▒██▒▒▒█▒▒▒\n"
+                                + "░██▒▒▒▒████░\n"
+                                + "░░░▒▒▒▒▒▒▒░░\n"
+                                + "░░██▓███░░░░\n"
+                                + "░███▓██▓███░\n"
+                                + "████▓▓▓▓████\n"
+                                + "▒▒█▓▒▓▓▒▓█▒▒\n"
+                                + "▒▒▒▓▓▓▓▓▓▒▒▒\n"
+                                + "▒▒▓▓▓▓▓▓▓▓▒▒\n"
+                                + "░░▓▓▓░░▓▓▓░░\n"
+                                + "░███░░░░███░\n"
+                                + "████░░░░████\n");
 
+                System.out.println();
                 System.out.print("De cuanto es su presupuesto inicial (Sin puntos ni comas, todo pegado): ");
                 String monto = entrada.nextLine().trim();
 
@@ -41,11 +60,7 @@ public class App {
                 }
 
                 System.out.println();
-
-                System.out.println();
-
                 obj.setNombreUsuario(nombreUsuario);
-
                 obj.setMonto(Long.parseLong(monto));
                 obj.mostrarMenu();
         }
